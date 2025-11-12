@@ -1,4 +1,4 @@
-mainmenu "xInit 1.0 Configuration"
+mainmenu "xInit v1.0 Configuration"
 
 menu "General options"
 
