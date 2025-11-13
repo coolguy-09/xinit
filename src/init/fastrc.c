@@ -108,14 +108,14 @@ static void do_reboot(void) {
 
 static void sigterm_handler(int sig) {
     (void)sig;
-    dprintf(STDOUT_FILENO, ":: Shutdown requested\n");
+    log_msg(":: Poweroff requested\n");
     if (shutdown_cmd) run_script(shutdown_cmd);
     do_poweroff();
 }
 
 static void sigusr1_handler(int sig) {
     (void)sig;
-    dprintf(STDOUT_FILENO, ":: Reboot requested\n");
+    log_msg(":: Reboot requested\n");
     if (reboot_cmd) run_script(reboot_cmd);
     do_reboot();
 }
@@ -203,4 +203,3 @@ int main(void) {
 
     for (;;) pause();
 }
-
