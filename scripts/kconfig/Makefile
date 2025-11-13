@@ -8,7 +8,7 @@ LXOBJ = scripts/kconfig/lxdialog/checklist.o scripts/kconfig/lxdialog/inputbox.o
 KSRC = scripts/kconfig/confdata.c scripts/kconfig/expr.c scripts/kconfig/lexer.lex.c scripts/kconfig/menu.c scripts/kconfig/mnconf-common.c scripts/kconfig/parser.tab.c scripts/kconfig/preprocess.c scripts/kconfig/symbol.c scripts/kconfig/util.c
 KOBJ = scripts/kconfig/confdata.o scripts/kconfig/expr.o scripts/kconfig/lexer.lex.o scripts/kconfig/menu.o scripts/kconfig/mnconf-common.o scripts/kconfig/parser.tab.o scripts/kconfig/preprocess.o scripts/kconfig/symbol.o scripts/kconfig/util.o
 
-all: configcheck output/xinit output/xinitctl
+all: configcheck output/fastrc output/fastctl
 
 scripts/kconfig/%.o: scripts/kconfig/%.c
 	@echo "  HOSTCC  $@"
