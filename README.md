@@ -75,5 +75,6 @@ initrd
 │   ├── fastrc
 │   ├── fastctl
 │   ├── poweroff -> symlink to fastctl
-└   └── reboot -> symlink to fastctl
+├── └── reboot -> symlink to fastctl
+└── init -> symlink to sbin/fastrc
 ```
