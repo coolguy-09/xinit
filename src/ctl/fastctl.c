@@ -12,31 +12,31 @@ void usage(const char *prog) {
 }
 
 int main(int argc, char **argv) {
-    pid_t init_pid = 1; // xInit is PID 1
+    pid_t init_pid = 1; // FastRC is PID 1
     int sig = 0;
     const char *cmd = NULL;
 
-    // First check if called with argument: "xinitctl poweroff"
+    // First check if called with argument: "fastctt"
     if (argc >= 2) {
         cmd = argv[1];
     } else {
-        // Otherwise, check program name: "poweroff" or "reboot"
+        // Otherwise, check program name
         const char *progname = strrchr(argv[0], '/');
         progname = progname ? progname + 1 : argv[0];
         cmd = progname;
     }
 
     if (strcmp(cmd, "poweroff") == 0) {
-        sig = SIGTERM;  // tell xInit to shutdown
+        sig = SIGTERM;  // tell FastRC to shutdown
     } else if (strcmp(cmd, "reboot") == 0) {
-        sig = SIGUSR1;  // tell xInit to reboot
+        sig = SIGUSR1;  // tell FastRC to reboot
     } else {
         usage(argv[0]);
         return 1;
     }
 
     if (kill(init_pid, sig) != 0) {
-        perror("Failed to send signal to xInit");
+        perror("Failed to send signal to FastRC");
         return 1;
     }
 
