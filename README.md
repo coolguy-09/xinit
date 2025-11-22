@@ -24,7 +24,7 @@ make menuconfig
 ```
 This will bring up a TUI for you to customize your init.
 ### 3. Compiling
-#### After compiling, to compile it:
+#### After configuring, to compile it:
 ```bash
 make
 ```
