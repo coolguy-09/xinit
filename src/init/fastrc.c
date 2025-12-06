@@ -146,7 +146,7 @@ static int parse_inittab(void) {
         while (*val == ' ' || *val == '\t') val++;
 
         if      (!strcmp(key, "sysinit"))     sysinit_cmd     = strdup(val);
-        else if (!strcmp(key, "shutdown"))    shutdown_cmd    = strdup(val);
+        else if (!strcmp(key, "poweroff"))    shutdown_cmd    = strdup(val);
         else if (!strcmp(key, "reboot"))      reboot_cmd      = strdup(val);
         else if (!strcmp(key, "ctrlaltdel"))  ctrlaltdel_cmd  = strdup(val);
         else if (!strcmp(key, "respawn"))     add_respawn(val);
