@@ -8,6 +8,8 @@
 #include <linux/reboot.h>
 #include <sys/mount.h>
 #include <errno.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include "../../include/generated/autoconf.h"
 
@@ -33,6 +35,22 @@ static char *ctrlaltdel_cmd = NULL;
 typedef struct { pid_t pid; char *cmd; } respawn_entry;
 static respawn_entry respawns[MAX_RESPAWN];
 static size_t respawn_count = 0;
+
+static int make_folder(const char *path) {
+    struct stat st;
+    if (stat(path, &st) == 0) {
+        if (S_ISDIR(st.st_mode)) {
+            return 0; // already exists
+        } else {
+            return -1; // exists but not a directory
+        }
+    }
+    // Doesn't exist, try to create
+    if (mkdir(path, 0755) == 0) {
+        return 0; // created successfully
+    }
+    return -1; // mkdir failed
+}
 
 static pid_t spawn(const char *cmd) {
     if (!cmd || !*cmd) return -1;
@@ -160,16 +178,28 @@ static void do_automounts(void) {
 #ifdef CONFIG_MOUNT_FS
     log_msg("Mounting filesystems...");
     #ifdef CONFIG_MOUNT_FS_DEV
+    make_folder("/dev");
     mount("devtmpfs", "/dev", "devtmpfs", 0, "");
     #endif
+    #ifdef CONFIG_MOUNT_FS_DEVPTS
+    make_folder("/dev/pts");
+    mount("devpts", "/dev/pts", "devpts", 0, "");
+    #endif
     #ifdef CONFIG_MOUNT_FS_PROC
+    make_folder("/proc");
     mount("proc", "/proc", "proc", 0, "");
     #endif
     #ifdef CONFIG_MOUNT_FS_SYS
+    make_folder("/sys");
     mount("sysfs", "/sys", "sysfs", 0, "");
     #endif
     #ifdef CONFIG_MOUNT_FS_TMP
+    make_folder("/tmp");
     mount("tmpfs", "/tmp", "tmpfs", 0, "");
+    #endif
+    #ifdef CONFIG_MOUNT_FS_RUN
+    make_folder("/run");
+    mount("tmpfs", "/run", "run", 0, "");
     #endif
 #endif
 }
