@@ -34,9 +34,9 @@ config MOUNT_FS_DEV
 	depends on MOUNT_FS
 
 config MOUNT_FS_DEVPTS
-	bool "Mount /dev"
+	bool "Mount /dev/pts"
 	default n
-	depends on MOUNT_FS
+	depends on MOUNT_FS_DEV
 
 config MOUNT_FS_PROC
 	bool "Mount /proc"
@@ -50,6 +50,11 @@ config MOUNT_FS_SYS
 
 config MOUNT_FS_TMP
 	bool "Mount /tmp"
+	default n
+	depends on MOUNT_FS
+
+config MOUNT_FS_RUN
+	bool "Mount /run"
 	default n
 	depends on MOUNT_FS
 endmenu
