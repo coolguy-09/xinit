@@ -45,7 +45,7 @@ mkdir fastrc
 # Main script/program
 sysinit=/etc/fastrc/rcS
 # Script/program that runs before poweroff
-shutdown=/etc/fastrc/poweroff
+poweroff=/etc/fastrc/poweroff
 # Script/program that runs before reboot
 reboot=/etc/fastrc/poweroff
 # Script/program that runs for ctrl+alt+del
