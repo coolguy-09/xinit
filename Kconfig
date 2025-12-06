@@ -33,6 +33,11 @@ config MOUNT_FS_DEV
 	default n
 	depends on MOUNT_FS
 
+config MOUNT_FS_DEVPTS
+	bool "Mount /dev"
+	default n
+	depends on MOUNT_FS
+
 config MOUNT_FS_PROC
 	bool "Mount /proc"
 	default n
